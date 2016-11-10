@@ -109,7 +109,7 @@ namespace xlog
 		}
 		void operator >> (std::ostream &out)
 		{
-			int pos = 0;
+			std::size_t pos = 0;
 			char *buf = heap_buf_ ? heap_buf_.get() : stack_buf_;
 
 			out << "[" << to_string(level_) << "] ";
@@ -269,12 +269,12 @@ namespace xlog
 		}
 		void copy_str(const char *str)
 		{
-			size_t len = strlen(str)+1;// for \0
+			std::size_t len = strlen(str)+1;// for \0
 			check_buffer(len);
 			memcpy(buffer(), str, len);
 			buf_used_ += len;
 		}
-		void check_buffer(int size)
+		void check_buffer(std::size_t size)
 		{
 			if (size + buf_used_ > buf_size_)
 			{
@@ -301,13 +301,13 @@ namespace xlog
 		}
 		const char *file_ = nullptr;
 		log_level level_;
-		int line_ = 0;
+		std::size_t line_ = 0;
 		std::unique_ptr<char[]> heap_buf_;
-		int buf_used_ = 0;
-		int buf_size_ ;
+		std::size_t buf_used_ = 0;
+		std::size_t buf_size_ ;
 		char stack_buf_[256 - 
 			sizeof(log_level) -
-			sizeof(int) *3 -
+			sizeof(std::size_t) *3 -
 			sizeof(decltype(file_)) - 
 			sizeof(decltype(heap_buf_))];
 	};
