@@ -110,7 +110,6 @@ namespace xlog
 		void operator >> (std::ostream &out)
 		{
 			int pos = 0;
-			int type;
 			char *buf = heap_buf_ ? heap_buf_.get() : stack_buf_;
 
 			out << "[" << to_string(level_) << "] ";
