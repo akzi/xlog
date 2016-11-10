@@ -259,6 +259,7 @@ namespace xlog
 			default:
 				assert(false);
 			}
+			return "...";
 		}
 		template<typename T>
 		void append_obj(T t)
